@@ -42,8 +42,8 @@ public class GameController extends BaseRestController {
 
     @PutMapping("/games/{id}")
     @ResponseStatus(HttpStatus.ACCEPTED)
-    public ResponseEntity<Game> update(@PathVariable Long id, @RequestBody Game game) {
+    public Game update(@PathVariable Long id, @RequestBody Game game) {
         this.service.update(id, game);
-        return ResponseEntity.accepted().build();
+        return game;
     }
 }
