@@ -27,15 +27,17 @@ public class GameController extends BaseRestController {
     }
 
     @PatchMapping("/games/{id}/vote")
-    public ResponseEntity<Game> vote(@PathVariable Long id) {
+    @ResponseStatus(HttpStatus.ACCEPTED)
+    public Game vote(@PathVariable Long id) {
         this.service.vote(id);
-        return ResponseEntity.ok().build();
+        return this.service.findById(id);
     }
 
     @PostMapping("/games")
+    @ResponseStatus(HttpStatus.CREATED)
     public ResponseEntity<Game> insert(@RequestBody Game game) {
         this.service.insert(game);
-        return ResponseEntity.ok().build();
+        return ResponseEntity.ok(game);
     }
 
     @PutMapping("/games/{id}")
